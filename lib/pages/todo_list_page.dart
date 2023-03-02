@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list_edited/widgets/todo_list_item.dart';
 
 class TodoListPage extends StatelessWidget {
-  const TodoListPage({super.key});
+  TodoListPage({super.key});
+  
+  final TextEditingController textController = TextEditingController();
+  List<String> todos = [];
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +23,10 @@ class TodoListPage extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Expanded (
+                      Expanded (
                         child: TextField(
-                          decoration: InputDecoration(
+                          controller: textController,
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             label: Text('Adicione uma Tarefa'),
                             hintText: 'Ex:. Estudar Flutter',                 
@@ -34,15 +39,19 @@ class TodoListPage extends StatelessWidget {
                           padding: const EdgeInsets.all(16.0),
                         ),
                         child: const Icon(Icons.add,size: 30),
-                         onPressed: (){},
+                         onPressed: (){
+                          //text = textController;
+
+                         },
                       ),
                     ],
                   ),
                   const SizedBox(height: 20.0,),
                   Flexible(
                     child: ListView(
+                      shrinkWrap: true,
                       children: [
-                        
+                        TodoListItem(title: textController.text),
                       ],
                     ),
                   ),
