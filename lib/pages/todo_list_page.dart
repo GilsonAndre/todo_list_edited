@@ -91,9 +91,7 @@ class _TodoListPageState extends State<TodoListPage> {
                       //Botão responsavel por apagar tudo
                       ElevatedButton(
                         onPressed: (){
-                          setState(() {
-                            todos.clear();
-                          });
+                         showDeletedAllTodo();
                         },
                          style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.all(16.0)
@@ -116,8 +114,10 @@ class _TodoListPageState extends State<TodoListPage> {
     setState(() {
       todos.remove(todo);
     });
+
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('A tarefa ${todo.title} foi deletada'),
+      SnackBar(content: 
+      Text('A tarefa ${todo.title} foi deletada'),
         action: SnackBarAction(
           label: 'Desfazer',
           onPressed:(){
@@ -127,6 +127,36 @@ class _TodoListPageState extends State<TodoListPage> {
           },
         ),
       ),
+    );
+  }
+  void showDeletedAllTodo(){
+    showDialog(
+      context: context, 
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Limpar Tudo'),
+          content: const Text('Deseja Limpar Tudo?'),
+          actions: [
+            TextButton(
+              onPressed: (){
+                setState(() {
+                  Navigator.of(context).pop();
+                });
+              }, 
+              child: const Text('Cancelar')
+            ),
+            TextButton(
+              onPressed: (){
+                setState(() {
+                  Navigator.of(context).pop();
+                  todos.clear();
+                });
+              }, 
+              child: const Text('Limpar tudo')
+            ),
+          ],
+        );
+      },
     );
   }
 }

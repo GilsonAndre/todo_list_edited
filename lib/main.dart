@@ -22,3 +22,11 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+/*
+LinearGradient(
+          colors: [Color(0xff3d4eaf), Color(0xfff32e20)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        )
+      
+*/
