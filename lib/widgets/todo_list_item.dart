@@ -15,9 +15,9 @@ class TodoListItem extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text('14/02/199', style: TextStyle(fontSize: 12),),
-          Text('Estudar flutter',style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        children: [
+          const Text('14/02/199', style: TextStyle(fontSize: 12),),
+          Text(title ,style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
         ],
       ),
     );
