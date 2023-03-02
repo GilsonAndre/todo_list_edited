@@ -15,10 +15,12 @@ class _TodoListPageState extends State<TodoListPage> {
 
   List<Todo> todos = [];
 
+  Todo? deletedTodo;  
+  int? deletedTodoPosition;
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SafeArea(
+    return SafeArea(
         child: Scaffold(
           appBar: AppBar(
             title: const Text('Lista de Tarefas'),
@@ -73,6 +75,7 @@ class _TodoListPageState extends State<TodoListPage> {
                         for(Todo element in todos)
                           TodoListItem(
                             todo: element,
+                            onDeleted: onDeleted,
                           ),
                       ],
                     ),
@@ -103,6 +106,25 @@ class _TodoListPageState extends State<TodoListPage> {
               ),
             ),
           ),
+        ),
+    );
+  }
+  void onDeleted(Todo todo){
+    deletedTodo = todo;
+    deletedTodoPosition = todos.indexOf(todo);
+
+    setState(() {
+      todos.remove(todo);
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('A tarefa ${todo.title} foi deletada'),
+        action: SnackBarAction(
+          label: 'Desfazer',
+          onPressed:(){
+            setState(() {
+              todos.insert(deletedTodoPosition!, todo);
+            });
+          },
         ),
       ),
     );
