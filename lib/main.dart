@@ -18,15 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TodoListPage(),
+      home:TodoListPage(),
     );
   }
 }
-/*
-LinearGradient(
-          colors: [Color(0xff3d4eaf), Color(0xfff32e20)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        )
-      
-*/

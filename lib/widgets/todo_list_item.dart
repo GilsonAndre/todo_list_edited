@@ -24,28 +24,29 @@ class TodoListItem extends StatelessWidget {
               onPressed:(context) => onDeleted(todo),
               label: 'Deletar',
               icon: Icons.delete,
-              backgroundColor: Colors.red,
+              backgroundColor: Colors.transparent,
             ),
           ]
         ),
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.0),
-            color: Colors.grey[200],
+            borderRadius: BorderRadius.circular(8.0,),
+            color: Colors.transparent,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
                 DateFormat('dd/MMM/yyyy - HH:mm').format(todo.dateTime),
-                style: const TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12, color: Colors.white),
               ),
               Text(
                 todo.title ,
                 style: const TextStyle(
                   fontSize: 16, 
-                  fontWeight: FontWeight.bold
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white
                 ),
               ),
             ],

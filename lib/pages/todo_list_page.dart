@@ -22,23 +22,38 @@ class _TodoListPageState extends State<TodoListPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+          extendBodyBehindAppBar: true,
           appBar: AppBar(
             title: const Text('Lista de Tarefas'),
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
           ),
           body: Center(
-            child: Padding(
+            child: Container(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color(0xff3d4eaf), Color(0xfff32e20)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+              child: Column( 
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
                     children: [
                       Expanded (
+                        //TEXTFIELD RESPONSAVEL POR PEGAR AS TAREFAS DO USUARIO 
                         child: TextField(
+                          cursorColor: Colors.white,
                           controller: textController,
                           decoration: const InputDecoration(
                             border: OutlineInputBorder(),
-                            label: Text('Adicione uma Tarefa'),
+                            label: Text(
+                              'Adicione uma Tarefa', 
+                              style: TextStyle(color: Colors.white),
+                            ),
                             hintText: 'Ex:. Estudar Flutter',                 
                           ),
                         ),
@@ -48,8 +63,13 @@ class _TodoListPageState extends State<TodoListPage> {
                       ElevatedButton( 
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.all(16.0),
+                          side: const BorderSide(
+                            color: Colors.white
+                          ),
+                          backgroundColor: Colors.transparent,
+                          elevation: 0.0
                         ),
-                        child: const Icon(Icons.add,size: 30),
+                        child: const Icon(Icons.add,size: 30,),
                         onPressed: (){
                           String text = textController.text;
                           setState(() {
@@ -86,7 +106,9 @@ class _TodoListPageState extends State<TodoListPage> {
                     children: [
                       //Texto que mostra suas tarefas
                       Expanded(
-                        child: Text('Você possui ${todos.length} tarefas pendentes'),
+                        child: Text('Você possui ${todos.length} tarefas pendentes', 
+                        style: const TextStyle(color: Colors.white),
+                        ),
                       ),
                       //Botão responsavel por apagar tudo
                       ElevatedButton(
@@ -94,7 +116,13 @@ class _TodoListPageState extends State<TodoListPage> {
                          showDeletedAllTodo();
                         },
                          style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.all(16.0)
+                          padding: const EdgeInsets.all(16.0),
+                          side: const BorderSide(
+                            color: Colors.white
+                          ),
+                          backgroundColor: Colors.transparent,
+                          elevation: 0.0
+                          
                          ),
                         child: const Text('Limpar Tudo',)
                       ),
@@ -114,7 +142,7 @@ class _TodoListPageState extends State<TodoListPage> {
     setState(() {
       todos.remove(todo);
     });
-
+    ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: 
       Text('A tarefa ${todo.title} foi deletada'),
